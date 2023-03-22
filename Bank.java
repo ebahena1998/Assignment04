@@ -1,4 +1,4 @@
-import java.util.ArrayList ;
+import java.util.ArrayList;
 
 public class Bank {
     private ArrayList<Account> accountList = new ArrayList<>();
@@ -31,7 +31,7 @@ public class Bank {
             findAccount(id).printStatements();
         }
     }
-    public boolean depositToAccount(int accountId, double amount) {
+    public boolean depositToAccount(int accountId, double amount) throws AccountClosedException {
         Account temp = findAccount(accountId);
         if(temp != null && (temp.getStatus() == true)){
             temp.deposit(amount);
@@ -40,18 +40,23 @@ public class Bank {
             temp.deposit(amount);
             return true;
         }
-        return false;
+        else{
+            throw new AccountClosedException("Cannot Deposit, Account is Closed!");
+        }
     }
-    public boolean withdrawFromAccount(int accountId, double amount){
+    public boolean withdrawFromAccount(int accountId, double amount) throws AccountClosedException{
         Account temp = findAccount(accountId);
         if(temp != null && (temp.getStatus() == true)) {
             temp.withdraw(amount);
             return true;
-        }else if(temp.getStatus() == false && temp.getBalance() > 0.00){
+        }
+        else if(temp.getStatus() == false && temp.getBalance() > 0.00){
             temp.withdraw(amount);
             return true;
         }
-        return false;
+        else{
+            throw new AccountClosedException("Cannot Withdraw, Account is Closed!");
+        }
     }
     public boolean closeAccount(int accountId){
         Account temp = findAccount(accountId);

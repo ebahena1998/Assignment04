@@ -105,16 +105,21 @@ public class MainDriver{
         System.out.print("Enter the amount to deposit: ");
         double depositAmount = scnr.nextDouble();
         scnr.nextLine();
-        if (chase.depositToAccount(number, depositAmount) == true) {
-            Account temp = chase.findAccount(number);
-            System.out.printf("Deposit successful, the new balance is: " + temp.getBalance());
+        try{
+            if (chase.depositToAccount(number, depositAmount) == true) {
+                Account temp = chase.findAccount(number);
+                System.out.printf("Deposit successful, the new balance is: " + temp.getBalance());
+            }
+            else if(chase.depositToAccount(number, depositAmount) == false){
+                Account temp = chase.findAccount(number);
+                System.out.print("Deposit failed, the balance is: " + temp.getBalance());
+            }
+            else{
+                System.out.println("Account not found");
+            }
         }
-        else if(chase.depositToAccount(number, depositAmount) == false){
-            Account temp = chase.findAccount(number);
-            System.out.print("Deposit failed, the balance is: " + temp.getBalance());
-        }
-        else{
-            System.out.println("Account not found");
+        catch(AccountClosedException ace){
+            System.out.println(ace.getMessage());
         }
     }
     public static void withdrawFunds(){
@@ -122,16 +127,21 @@ public class MainDriver{
         System.out.print("Enter the amount to withdrawal amount: ");
         double withdrawAmount = scnr.nextDouble();
         scnr.nextLine();
-        if(chase.withdrawFromAccount(number, withdrawAmount) == true){
-            Account temp = chase.findAccount(number);
-            System.out.print("Withdrawal successful, the new balance is: " + temp.getBalance());
+        try{
+            if(chase.withdrawFromAccount(number, withdrawAmount) == true){
+                Account temp = chase.findAccount(number);
+                System.out.print("Withdrawal successful, the new balance is: " + temp.getBalance());
+            }
+            else if(chase.withdrawFromAccount(number, withdrawAmount) == false){
+                Account temp = chase.findAccount(number);
+                System.out.print("Withdrawal failed, the balance is: " + temp.getBalance());
+            }
+            else{
+                System.out.println("Account not found");
+            }
         }
-        else if(chase.withdrawFromAccount(number, withdrawAmount) == false){
-            Account temp = chase.findAccount(number);
-            System.out.print("Withdrawal failed, the balance is: " + temp.getBalance());
-        }
-        else{
-            System.out.println("Account not found");
+        catch(AccountClosedException ace){
+            System.out.println(ace.getMessage());
         }
 
     }

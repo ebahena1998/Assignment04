@@ -20,8 +20,7 @@ public class Account {
 
     // Withdraw money from a bank account that has a negative balance or zero balance
     // AccountClosedException
-    public void withdraw(double amount){
-        try{
+    public void withdraw(double amount) throws AccountClosedException{
             if((status == true) && (amount > 0.00)){
                 Statement newDebit = new DebitStatements("Debit : ", amount);
                 statementList.add(newDebit);
@@ -31,13 +30,10 @@ public class Account {
                 if(balance - amount < balance){
                     this.balance -= amount;
                 }
+                else{
+                    throw new AccountClosedException("ERROR");
+                }
             }
-            else{
-                throw new AccountClosedException("ERROR, AMOUNT TO WITHDRAW MUST BE GREATER THAN THE BALANCE!");
-            }
-        }catch(AccountClosedException ace){ 
-            //Ignore 
-        }
     }
 
     // Deposit money from a bank account that has a zero balance or positive balance
