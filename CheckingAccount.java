@@ -1,5 +1,5 @@
 public class CheckingAccount extends Account{
-    public CheckingAccount(Person customer, int id, double overdraft){
+    public CheckingAccount(Person customer, int id, double overdraft) throws AccountClosedException{
         super(customer, id);
         super.withdraw(overdraft);
     }
