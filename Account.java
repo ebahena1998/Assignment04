@@ -29,6 +29,10 @@ public class Account {
             }
         }
     }
+
+    //Deposit money from a bank account that has a zero balance or positive balance
+
+    
     public void deposit(double amount){
         if((status == true) && (amount > 0.00)){
             Statement newCredit = new CreditStatements("Credit : ", amount);
