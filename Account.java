@@ -17,6 +17,9 @@ public class Account {
         return (this.id);
     }
     //Methods
+
+    // Withdraw money from a bank account that has a negative balance or zero balance
+    // AccountClosedException
     public void withdraw(double amount){
         if((status == true) && (amount > 0.00)){
             Statement newDebit = new DebitStatements("Debit : ", amount);
@@ -30,9 +33,8 @@ public class Account {
         }
     }
 
-    //Deposit money from a bank account that has a zero balance or positive balance
-
-    
+    // Deposit money from a bank account that has a zero balance or positive balance
+    // AccountClosedException
     public void deposit(double amount){
         if((status == true) && (amount > 0.00)){
             Statement newCredit = new CreditStatements("Credit : ", amount);
